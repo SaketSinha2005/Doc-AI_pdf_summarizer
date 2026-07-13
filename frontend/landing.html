@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DocGen AI - Professional PDF Report Generator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+<script src="tailwind-config.js"></script>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col font-body-md">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-background border-b border-outline-variant dark:border-outline sticky top-0 z-50 w-full transition-colors duration-150">
+<div class="flex justify-between items-center w-full px-gutter h-16 max-w-container-max mx-auto">
+<div class="flex items-center gap-xl">
+<!-- Brand -->
+<a class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed flex items-center gap-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">document_scanner</span>
+                    DocGen AI
+                </a>
+<!-- Desktop Navigation -->
+<nav class="hidden md:flex items-center gap-lg">
+<a class="text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary font-label-md text-label-md uppercase tracking-widest hover:bg-surface-container-low dark:hover:bg-on-secondary-fixed transition-colors duration-150 py-sm px-md rounded" href="#">How it Works</a>
+<a class="text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary font-label-md text-label-md uppercase tracking-widest hover:bg-surface-container-low dark:hover:bg-on-secondary-fixed transition-colors duration-150 py-sm px-md rounded" href="#">Reports</a>
+
+</nav>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-md">
+
+<button class="js-upload-trigger hidden md:flex bg-primary-container text-on-primary border border-transparent hover:bg-primary-fixed-variant font-label-md text-label-md px-lg py-sm rounded transition-colors duration-150 uppercase tracking-wide shadow-sm items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+                    Upload PDF
+                </button>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-on-surface-variant p-sm">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col w-full">
+<!-- Hero & Upload Section -->
+<section class="w-full px-gutter py-xl md:py-24 relative overflow-hidden">
+<!-- Subtle background decorative elements -->
+<div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-bl from-surface-container-highest to-transparent opacity-30 -z-10 pointer-events-none"></div>
+<div class="max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-12 gap-xl items-center">
+<!-- Hero Copy -->
+<div class="lg:col-span-5 flex flex-col gap-lg">
+<div class="inline-flex items-center gap-sm bg-surface-container-high px-md py-xs rounded-full w-fit border border-surface-dim">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Enterprise Grade Analysis</span>
+</div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface">
+                        Transform complex PDFs into actionable reports.
+                    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">
+                        Securely process legal, financial, and technical documents with military-grade encryption and AI-driven precision.
+                    </p>
+<div class="flex flex-wrap gap-md mt-sm">
+<div class="flex items-center gap-xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[18px] text-primary">verified_user</span>
+                            SOC2 Compliant
+                        </div>
+<div class="flex items-center gap-xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[18px] text-primary">lock</span>
+                            End-to-End Encryption
+                        </div>
+</div>
+</div>
+<!-- Upload Zone -->
+<div class="lg:col-span-7 relative">
+<!-- Glassmorphism Container -->
+<div class="glass-panel rounded-xl p-lg md:p-xl shadow-[0_4px_24px_rgba(0,0,0,0.02)] relative z-10">
+<div class="border-2 border-dashed border-outline-variant rounded-lg p-xl flex flex-col items-center justify-center text-center bg-surface-container-lowest hover:bg-surface-container transition-colors duration-200 cursor-pointer group min-h-[320px]">
+<div class="w-16 h-16 bg-surface-container-low rounded-full flex items-center justify-center mb-lg group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-[32px] text-primary">cloud_upload</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-xs">Drag &amp; Drop PDF</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg max-w-sm">
+                                or click to browse your files. Supports complex documents up to 500 pages.
+                            </p>
+<button class="js-upload-trigger bg-surface-container-lowest border border-outline text-on-surface font-label-md text-label-md px-lg py-sm rounded hover:bg-surface-container transition-colors duration-150 uppercase tracking-wide">
+                                Browse Files
+                            </button>
+<input type="file" id="global-file-input" accept=".pdf" class="hidden" />
+<p class="font-body-sm text-body-sm text-outline mt-lg">
+                                PDF only. Max size 50MB.
+                            </p>
+</div>
+</div>
+<!-- Decorative background element for the card -->
+<div class="absolute -top-4 -right-4 w-full h-full bg-surface-container rounded-xl -z-10 border border-surface-dim"></div>
+</div>
+</div>
+</section>
+<!-- Features / Trust Signals (Bento Grid) -->
+<section class="w-full px-gutter py-xl bg-surface-container-lowest border-t border-outline-variant">
+<div class="max-w-container-max mx-auto">
+<div class="text-center mb-xl">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-sm">Engineered for Precision</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">Our extraction algorithms are trained on millions of enterprise documents to ensure flawless data parsing.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<!-- Bento Item 1 -->
+<div class="bg-surface p-lg rounded-lg border border-outline-variant hover:shadow-[0_4px_12px_rgba(0,0,0,0.03)] transition-shadow duration-200 flex flex-col">
+<div class="w-10 h-10 bg-primary-fixed text-on-primary-fixed rounded flex items-center justify-center mb-md">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-xs">AI-Powered Insights</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex-grow">
+                            Automatically identifies key clauses, financial figures, and entities within dense legal or technical text, surfacing them in a structured format.
+                        </p>
+</div>
+<!-- Bento Item 2 -->
+<div class="bg-surface p-lg rounded-lg border border-outline-variant hover:shadow-[0_4px_12px_rgba(0,0,0,0.03)] transition-shadow duration-200 flex flex-col">
+<div class="w-10 h-10 bg-primary-fixed text-on-primary-fixed rounded flex items-center justify-center mb-md">
+<span class="material-symbols-outlined">security</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-xs">Secure &amp; Encrypted</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex-grow">
+                            Files are processed in an isolated environment and permanently deleted upon extraction. 256-bit AES encryption at rest and in transit.
+                        </p>
+</div>
+<!-- Bento Item 3 -->
+<div class="bg-surface p-lg rounded-lg border border-outline-variant hover:shadow-[0_4px_12px_rgba(0,0,0,0.03)] transition-shadow duration-200 flex flex-col">
+<div class="w-10 h-10 bg-primary-fixed text-on-primary-fixed rounded flex items-center justify-center mb-md">
+<span class="material-symbols-outlined">speed</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-xs">Rapid Processing</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex-grow">
+                            Generate comprehensive reports in seconds, not hours. Our distributed architecture handles massive documents without breaking a sweat.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-inverse-surface border-t border-outline-variant dark:border-outline mt-auto w-full">
+<div class="flex flex-col md:flex-row justify-between items-center w-full py-lg px-gutter max-w-container-max mx-auto gap-md">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface dark:text-inverse-on-surface text-[20px]" style="font-variation-settings: 'FILL' 1;">document_scanner</span>
+<span class="font-headline-sm text-headline-sm text-on-surface dark:text-inverse-on-surface font-semibold">DocGen AI</span>
+</div>
+<div class="flex flex-wrap justify-center gap-md md:gap-lg">
+
+<div class="font-body-sm text-body-sm text-secondary dark:text-secondary-fixed">
+                © 2024 DocGen Professional. All rights reserved.
+            </div>
+</div>
+</footer>
+
+<script src="script.js"></script>
+</body></html>
