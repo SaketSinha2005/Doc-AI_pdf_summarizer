@@ -46,6 +46,8 @@
 </header>
 <!-- Main Content Canvas -->
 <main class="flex-grow flex flex-col w-full">
+<!-- UPLOAD VIEW -->
+<div id="upload-view">
 <!-- Hero & Upload Section -->
 <section class="w-full px-gutter py-xl md:py-24 relative overflow-hidden">
 <!-- Subtle background decorative elements -->
@@ -141,6 +143,134 @@
 </div>
 </div>
 </section>
+</div>
+<!-- /UPLOAD VIEW -->
+
+<!-- LOADING VIEW -->
+<div id="loading-view" class="hidden min-h-[70vh] flex flex-col items-center justify-center relative overflow-hidden px-gutter">
+<div class="absolute inset-0 pointer-events-none opacity-20">
+<div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-container rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse" style="animation-duration: 8s;"></div>
+<div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-tertiary-container rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style="animation-duration: 12s; animation-delay: 2s;"></div>
+</div>
+<div class="w-full max-w-2xl relative z-10 flex flex-col items-center">
+<!-- Document Icon / Visual Anchor -->
+<div class="relative w-24 h-24 mb-xl flex items-center justify-center">
+<div class="absolute inset-0 border-2 border-primary-container rounded-full pulse-ring"></div>
+<div class="w-16 h-16 bg-surface-container-lowest border border-outline-variant shadow-sm rounded-lg flex items-center justify-center z-10 relative overflow-hidden">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">description</span>
+<div class="absolute top-0 left-0 w-full h-[2px] bg-primary opacity-50 shadow-[0_0_8px_rgba(0,82,255,0.8)]" style="animation: scan 2s ease-in-out infinite;"></div>
+</div>
+</div>
+<!-- Dynamic Status Text -->
+<div class="text-center mb-lg" id="status-container">
+<h1 class="font-headline-md text-headline-md text-on-surface mb-sm" id="status-title">Analyzing Document Structure...</h1>
+<p class="font-body-md text-body-md text-on-surface-variant" id="status-subtitle">Extracting key entities and metadata</p>
+</div>
+<!-- Progress Bar -->
+<div class="w-full max-w-md bg-surface-container-lowest border border-outline-variant rounded-full h-xs overflow-hidden mb-sm shadow-sm">
+<div class="bg-primary h-full progress-bar-fill w-[0%]" id="main-progress"></div>
+</div>
+<div class="w-full max-w-md flex justify-between items-center px-sm">
+<span class="font-code-sm text-code-sm text-outline" id="progress-percent">0%</span>
+<span class="font-label-md text-label-md text-outline tracking-widest uppercase">Processing</span>
+</div>
+</div>
+</div>
+<!-- /LOADING VIEW -->
+
+<!-- RESULT VIEW -->
+<div id="result-view" class="hidden w-full flex-grow flex overflow-hidden" style="height: calc(100vh - 64px);">
+<!-- Sidebar Navigation -->
+<aside class="w-64 bg-surface-container-lowest border-r border-outline-variant hidden md:flex flex-col flex-shrink-0 h-full">
+<div class="p-md border-b border-outline-variant bg-surface-bright">
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-2">Report Sections</h2>
+<div class="font-headline-sm text-headline-sm text-on-surface truncate" id="sidebar-doc-title">Document Report</div>
+</div>
+<nav class="flex-1 overflow-y-auto sidebar-scroll p-sm py-4 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded bg-surface-container-low text-primary font-body-sm text-body-sm transition-colors" href="#summary-section">
+<span class="material-symbols-outlined text-[18px]">format_align_left</span>
+                    Summary
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded hover:bg-surface-container-lowest text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm transition-colors" href="#insights-section">
+<span class="material-symbols-outlined text-[18px]">lightbulb</span>
+                    Key Insights
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded hover:bg-surface-container-lowest text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm transition-colors" href="#data-section">
+<span class="material-symbols-outlined text-[18px]">table_chart</span>
+                    Data Points
+                </a>
+</nav>
+<div class="p-md border-t border-outline-variant">
+<button id="reset-btn" class="w-full bg-surface-container-lowest border border-outline-variant text-on-surface font-label-md text-label-md px-4 py-2 rounded hover:bg-surface transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+                    Summarize Another
+                </button>
+</div>
+</aside>
+<!-- Document Canvas -->
+<div class="flex-1 overflow-y-auto bg-surface p-4 md:p-lg lg:p-xl relative">
+<div class="max-w-[800px] mx-auto bg-surface-container-lowest border border-outline-variant rounded-DEFAULT shadow-[0_4px_12px_rgba(0,0,0,0.02)] min-h-full flex flex-col">
+<!-- Report Header -->
+<div class="p-lg md:p-xl border-b border-outline-variant bg-surface-bright">
+<div class="flex justify-between items-start mb-6 gap-4">
+<div class="min-w-0">
+<div class="font-label-md text-label-md text-primary uppercase tracking-wider mb-2">Automated Analysis Report</div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-2" id="result-title">—</h1>
+<p class="font-body-md text-body-md text-on-surface-variant truncate" id="result-filename">Source Document</p>
+</div>
+<div class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded font-code-sm text-code-sm flex items-center gap-1 flex-shrink-0">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                            Generated
+                        </div>
+</div>
+<div class="flex flex-wrap gap-6 border-t border-outline-variant pt-4">
+<div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase mb-1">Date</div>
+<div class="font-body-sm text-body-sm text-on-surface" id="result-date">—</div>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase mb-1">Extraction Confidence</div>
+<div class="font-body-sm text-body-sm text-primary font-medium flex items-center gap-1" id="result-confidence" title="Percentage of pages that yielded readable text">—</div>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase mb-1">Pages Analyzed</div>
+<div class="font-body-sm text-body-sm text-on-surface" id="result-pages">—</div>
+</div>
+</div>
+</div>
+<!-- Report Body -->
+<div class="p-lg md:p-xl flex flex-col gap-10">
+<!-- Summary Section -->
+<section class="scroll-mt-6" id="summary-section">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-4">Summary</h2>
+<div class="prose max-w-none font-body-md text-body-md text-on-surface-variant leading-relaxed whitespace-pre-wrap" id="summary-output"></div>
+</section>
+<!-- Key Insights -->
+<section class="scroll-mt-6" id="insights-section">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6">Key Insights</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="insights-container"></div>
+</section>
+<!-- Data Points -->
+<section class="scroll-mt-6" id="data-section">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-4">Data Points</h2>
+<div class="border border-outline-variant rounded overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant text-on-surface-variant font-label-md text-label-md bg-surface-container-low">
+<th class="py-3 px-4 font-medium uppercase">Label</th>
+<th class="py-3 px-4 font-medium uppercase">Value</th>
+<th class="py-3 px-4 font-medium uppercase">Note</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm" id="data-points-body"></tbody>
+</table>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div>
+<!-- /RESULT VIEW -->
 </main>
 <!-- Footer -->
 <footer class="bg-surface-container-lowest dark:bg-inverse-surface border-t border-outline-variant dark:border-outline mt-auto w-full">
