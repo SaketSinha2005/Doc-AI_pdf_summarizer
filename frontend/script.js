@@ -1,22 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Buttons and Inputs
     const uploadBtns = document.querySelectorAll(".js-upload-trigger");
     const fileInput = document.getElementById("global-file-input");
     const resetBtn = document.getElementById("reset-btn");
 
-    // Views
     const uploadView = document.getElementById("upload-view");
     const loadingView = document.getElementById("loading-view");
     const resultView = document.getElementById("result-view");
     
-    // UI Elements for Loading/Result
     const summaryOutput = document.getElementById("summary-output");
     const progressBar = document.getElementById('main-progress');
     const progressText = document.getElementById('progress-percent');
     const statusTitle = document.getElementById('status-title');
     const statusSubtitle = document.getElementById('status-subtitle');
 
-    // Report dashboard elements
     const sidebarDocTitle = document.getElementById("sidebar-doc-title");
     const resultTitle = document.getElementById("result-title");
     const resultFilename = document.getElementById("result-filename");
@@ -28,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const dataSection = document.getElementById("data-section");
     const dataPointsBody = document.getElementById("data-points-body");
 
-    // Maps an insight "type" from the API to an icon + color treatment
     const INSIGHT_STYLES = {
         positive: { icon: "trending_up", bg: "bg-primary-container", text: "text-on-primary" },
         neutral: { icon: "info", bg: "bg-tertiary-container", text: "text-on-tertiary" },
@@ -47,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
         resultPages.innerText = data.pages_analyzed != null ? data.pages_analyzed : "—";
         summaryOutput.innerText = data.summary || "No summary available.";
 
-        // Insights (hide the whole section if the API returned none)
         insightsContainer.innerHTML = "";
         const insights = data.insights || [];
         if (insights.length === 0) {
@@ -74,7 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
-        // Data points (hide the whole section if the API returned none)
         dataPointsBody.innerHTML = "";
         const dataPoints = data.data_points || [];
         if (dataPoints.length === 0) {
@@ -97,7 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // 1. Trigger hidden file input
     if (uploadBtns.length > 0 && fileInput) {
         uploadBtns.forEach(btn => {
             btn.addEventListener("click", () => {
@@ -105,12 +97,10 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        // 2. Handle File Selection & Upload
         fileInput.addEventListener("change", (event) => {
             const selectedFile = event.target.files[0];
             
             if (selectedFile) {
-                // Validation
                 if (selectedFile.type !== "application/pdf") {
                     alert("Please select a valid PDF file.");
                     fileInput.value = ""; 
@@ -123,21 +113,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
 
-                // SWITCH VIEWS: Hide Upload, Show Loading
                 uploadView.classList.add("hidden");
                 loadingView.classList.remove("hidden");
 
-                // Start Fake Progress Animation
                 let progress = 0;
                 const interval = setInterval(() => {
-                    // Slowly tick up to 95%, but don't hit 100% until the API finishes
                     if (progress < 95) {
                         progress += Math.random() * 5 + 1; 
                         progressBar.style.width = `${Math.min(progress, 95)}%`;
                         progressText.innerText = `${Math.floor(Math.min(progress, 95))}%`;
                     }
                     
-                    // Update text based on progress
                     if (progress > 30) {
                         statusTitle.innerText = "Generating AI Insights...";
                         statusSubtitle.innerText = "Applying advanced contextual models";
@@ -148,7 +134,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 }, 800);
 
-                // Execute the actual API Call
                 const formData = new FormData();
                 formData.append("file", selectedFile);
 
@@ -161,16 +146,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     return response.json();
                 })
                 .then(data => {
-                    // API Finished! Stop the animation
                     clearInterval(interval);
 
-                    // Bump to 100% instantly
                     progressBar.style.width = `100%`;
                     progressText.innerText = `100%`;
                     statusTitle.innerText = "Processing Complete";
                     statusSubtitle.innerText = "Displaying report...";
 
-                    // Wait half a second for the 100% animation to finish, then show results
                     setTimeout(() => {
                         loadingView.classList.add("hidden");
                         resultView.classList.remove("hidden");
@@ -181,7 +163,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     clearInterval(interval);
                     console.error("Error summarizing PDF:", error);
                     alert("Something went wrong with the server. Check the console.");
-                    // Reset UI on failure
                     loadingView.classList.add("hidden");
                     uploadView.classList.remove("hidden");
                 });
@@ -189,14 +170,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 3. Reset Button Logic (To summarize another document)
     if(resetBtn) {
         resetBtn.addEventListener("click", () => {
             fileInput.value = ""; // clear file
             resultView.classList.add("hidden");
             uploadView.classList.remove("hidden");
             
-            // Reset loading UI for next time
             progressBar.style.width = `0%`;
             progressText.innerText = `0%`;
             statusTitle.innerText = "Analyzing Document Structure...";

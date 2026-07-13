@@ -79,9 +79,6 @@ async def summarize_pdf(file: UploadFile = File(...)):
             pages_with_text += 1
             extracted_text += text + "\n"
 
-    # Extraction confidence is a *measured* signal (how much of the PDF actually
-    # yielded readable text), not a made-up LLM confidence score. Scanned/image-only
-    # PDFs will show low confidence here, which is honest and useful.
     extraction_confidence = round((pages_with_text / total_pages) * 100, 1) if total_pages else 0.0
 
     if not extracted_text.strip():
