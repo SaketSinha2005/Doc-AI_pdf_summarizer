@@ -4,3 +4,4 @@ __pycache__/
 .venv/
 backend/.env
 *.pdf
+backend/secret.yaml
