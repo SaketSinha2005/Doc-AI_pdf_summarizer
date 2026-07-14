@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const formData = new FormData();
                 formData.append("file", selectedFile);
 
-                fetch("http://127.0.0.1:8000/summarize", {
+                fetch("http://192.168.49.2:30007/summarize", {
                     method: "POST",
                     body: formData
                 })
